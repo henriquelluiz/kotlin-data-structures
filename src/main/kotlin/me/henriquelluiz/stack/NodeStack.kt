@@ -28,14 +28,17 @@ class NodeStack<T> {
     }
 
     fun peek(): T? { return if (size == 0) null else elements!!.element  }
+
     override fun toString(): String {
-        var elementsRef = elements
-        val listOfElements = mutableListOf<T>()
-        while (elementsRef != null) {
-            listOfElements.add(elementsRef.element)
-            elementsRef = elementsRef.next
+        var elementsCopy = elements
+        val result = StringBuilder("Stack(")
+        while (elementsCopy != null) {
+            result.append(elementsCopy.element)
+            if (elementsCopy.next != null) { result.append(", ") }
+            elementsCopy = elementsCopy.next
         }
-        return listOfElements.reversed().joinToString(",", "Stack(", ")")
+        result.append(")")
+        return result.toString()
     }
 }
 
